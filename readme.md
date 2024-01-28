@@ -2,7 +2,7 @@
 
 ## How to Run the Project
 1. **Clone the Repository**:
-   * Use `` to pull the repo to your local machine.
+   * Use `https://github.com/zhimw/LibraryDatabaseBackend.git` to pull the repo to your local machine.
 2. **Load the sample information into your database** 
     * Load the `DDL.sql` into your SQL database, based on your database preference.
 3. **Configure your server information**

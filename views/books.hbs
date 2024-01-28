@@ -1,0 +1,150 @@
+<link href="../style.css" rel="stylesheet">
+<p id="navigation">
+    <a href="/">Home</a>
+    <a href="/patrons">Patrons</a>
+    <a href="/books">Books</a>   
+    <a href="/loans">Loans</a>   
+    <a href="/genres">Genres</a>   
+    <a href="/books-genres"> Books-Genres</a>   
+    <a href="/locations">Locations</a>   
+</p>
+
+
+<h1>Books</h1>
+<h3>Display books</h3>
+{{!-- Create a table --}}
+<table id="books-table" class="display">
+    {{!-- Header section --}}
+    <thead>
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>    
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each books}}
+        <tr>
+            <td>{{this.bookID}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.author}}</td>
+            <td>{{this.locationName}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<form action="/books" method="get">
+    <div>
+        <button type="submit">Reset</button>
+    </div>
+</form>
+
+<br>
+<h3>View books with the information you entered</h3>
+<p>All fields are optional. To get more accurate information, enter the ID fields.</p>
+<form action="/view-books" method="get">
+    <table>
+        <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Location</th>
+            <th>Check the box to view all NULL locations</th>
+        </tr>
+        <tr>
+            {{!-- <td><input type="text" name="bookID" id="select-bookID"></td> --}}
+            <td>
+                <select name="bookID" id="select-bookID">
+                    <option value="">Select a Book ID</option>
+                    {{#each books}}
+                    <option value="{{this.bookID}}">{{this.bookID}}</option>
+                    {{/each}}
+                </select>
+            </td>
+            <td><input type="text" name="title" id="select-title"></td>
+            <td><input type="text" name="author" id="select-author"></td>
+            <td>
+                <select name="locationName" id="select-locationID">
+                    <option value="">Select a Location</option>
+                    {{#each locations}}
+                    <option value="{{this.locationName}}">{{this.locationName}}</option>
+                    {{/each}}
+                </select>
+                <td><input type="checkbox" name="nullLocation" id="select-null-location"></td>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <button type="submit">View</button>
+    </div>
+</form>
+
+<br>
+<h3>Update a book's location</h3>
+<p>Please enter Book ID and Location ID. 
+<br>If Location ID is not selected, the location will be updated to NULL.
+</p>
+<form action="/update-books" method="post">
+<table>
+    <tr>
+        <th>Book ID</th>
+        <th>Location</th>
+    </tr>
+    <tr>
+        {{!-- <td><input type="text" name="bookID" id="update-bookID" required></td> --}}
+        <td>
+            <select name="bookID" id="select-bookID">
+                    <option value="">Select a Book ID</option>
+                    {{#each books}}
+                    <option value="{{this.bookID}}">{{this.bookID}}</option>
+                    {{/each}}
+                </select>
+            </td>
+        {{!-- <td><input type="text" name="locationID" id="update-locationID" required></td> --}}
+        <td>
+            <select name="locationID" id="select-locationID">
+                    <option value="">Select a Location</option>
+                    {{#each locations}}
+                    <option value="{{this.locationID}}">{{this.locationName}}</option>
+                    {{/each}}
+            </select>
+        </td>
+    </tr>
+</table>
+<div>
+    <button type="submit">Update</button>
+</div>
+</form>
+
+<br>
+<h3>Add a book to database</h3>
+<p>If Location ID is not selected, the location will be NULL.</p>
+<form action="/add-books" method="post" id="add-books">
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Location Name</th>
+    </tr>
+    <tr>
+        <td><input type="text" name="title" id="add-title" required></td>
+        <td><input type="text" name="author" id="add-author" required></td>
+        <td>
+            <select name="locationID" id="select-locationID">
+                    <option value="">Select a Location</option>
+                    {{#each locations}}
+                    <option value="{{this.locationID}}">{{this.locationName}}</option>
+                    {{/each}}
+            </select>
+        </td>
+    </tr>
+</table>
+<div>
+    <button type="submit">Add</button>
+</div>
+</form>

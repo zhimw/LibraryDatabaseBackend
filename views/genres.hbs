@@ -1,0 +1,83 @@
+<link href="../style.css" rel="stylesheet">
+<p id="navigation">
+    <a href="/">Home</a>
+    <a href="/patrons">Patrons</a>
+    <a href="/books">Books</a>   
+    <a href="/loans">Loans</a>   
+    <a href="/genres">Genres</a>   
+    <a href="/books-genres"> Books-Genres</a>   
+    <a href="/locations">Locations</a>   
+</p>
+
+
+<h1>Genres</h1>
+<h3>Display Genres</h3>
+{{!-- Create a table --}}
+<table id="genres-table" class="display">
+    {{!-- Header section --}}
+    <thead>
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>Genre ID</th>
+            <th>Genre Name</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.genreID}}</td>
+            <td>{{this.genreName}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<form action="/genres" method="get">
+    <div>
+        <button type="submit">Reset</button>
+    </div>
+</form>
+
+<br>
+<h3>View genres with the information you entered</h3>
+<form action="/view-genres" method="get", id="view-genres">
+    <table>
+        <tr>
+            <th>Genre Name</th>
+        </tr>
+        <tr>
+            {{!-- <td><input type="text" name="genreName" id="select-genreName"></td> --}}
+            <td>
+                <select name="genreName" id="select-genreName">
+                    <option value="">Select a Genre</option>
+                    {{#each genreNames}}
+                        <option value="{{this.genreName}}">{{this.genreName}}</option>
+                    {{/each}}
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <button type="submit">View</button>
+    </div>
+</form>
+
+<br>
+<h3>Add a new genre to database</h3>
+<p>Must enter a unique genre name.</p>
+<form action="/add-genre" method="post" id="add-genre">
+<table>
+    <tr>
+        <th>Genre Name</th>
+    </tr>
+    <tr>
+        <td><input type="text" name="genreName" id="add-genreName" required></td>
+    </tr>
+</table>
+<div>
+    <button type="submit">Add</button>
+</div>
+</form>

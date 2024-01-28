@@ -1,0 +1,157 @@
+<link href="../style.css" rel="stylesheet">
+<p id="navigation">
+    <a href="/">Home</a>
+    <a href="/patrons">Patrons</a>
+    <a href="/books">Books</a>   
+    <a href="/loans">Loans</a>   
+    <a href="/genres">Genres</a>   
+    <a href="/books-genres"> Books-Genres</a>   
+    <a href="/locations">Locations</a>   
+</p>
+
+
+<h1>Books-Genres</h1>
+<h3>Display books-genres</h3>
+{{!-- Create a table --}}
+<table id="books-genres-table" class="display">
+    {{!-- Header section --}}
+    <thead>
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>Book-Genre ID</th>
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Genre ID</th>
+            <th>Genre Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.bookGenreID}}</td>
+            <td>{{this.bookID}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.genreID}}</td>
+            <td>{{this.genreName}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<form action="/books-genres" method="get">
+    <div>
+        <button type="submit">Reset</button>
+    </div>
+</form>
+
+<br>
+<h3>View books-genres with the information you selected</h3>
+<form action="/view-books-genres" method="get">
+    <table>
+        <tr>
+            <th>Book Name</th>
+            <th>Genre Name</th>
+        </tr>
+        <tr>
+            {{!-- <td><input type="text" name="title" id="select-title"></td> --}}
+            <td>
+                <select name="title" id="select-title">
+                    <option value="">Select a Book</option>
+                    {{#each books}}
+                        <option value="{{this.title}}">{{this.title}}</option>
+                    {{/each}}
+                </select>
+            </td>
+            {{!-- <td><input type="text" name="genreName" id="select-genreName"></td> --}}
+            <td>
+                <select name="genreName" id="select-genreName">
+                    <option value="">Select a Genre</option>
+                    {{#each genres}}
+                        <option value="{{this.genreName}}">{{this.genreName}}</option>
+                    {{/each}}
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <button type="submit">View</button>
+    </div>
+</form>
+
+<br>
+<h3>Update a book-genre information from database</h3>
+<p>Book-Genre information is updated based on the Book-Genre ID you entered. </p>
+<form action="/update-books-genres" method="post">
+<table>
+    <tr>
+        <th>Books-Genres ID</th>
+        <th>Book Name</th>
+        <th>Genre Name</th>
+    </tr>
+    <tr>
+        {{!-- <td><input type="text" name="bookGenreID" id="bookGenreID" required></td> --}}
+        <td>
+            <select name="bookGenreID" id="select-bookGenreID">
+                    <option value="">Select a Book-Genre ID</option>
+                    {{#each bookGenres}}
+                        <option value="{{this.bookGenreID}}">{{this.bookGenreID}}</option>
+                    {{/each}}
+            </select>
+        </td>
+        <td>
+            <select name="bookID" id="select-book">
+                    <option value="">Select a Book Name</option>
+                    {{#each books}}
+                        <option value="{{this.bookID}}">{{this.title}}</option>
+                    {{/each}}
+            </select>
+        </td>
+        <td>
+            <select name="genreID" id="select-genre">
+                    <option value="">Select a Genre Name</option>
+                    {{#each genres}}
+                        <option value="{{this.genreID}}">{{this.genreName}}</option>
+                    {{/each}}
+            </select>
+        </td>
+    </tr>
+</table>
+<div>
+    <button type="submit">Update</button>
+</div>
+</form>
+
+<br>
+<h3>Add a book-genre pair to database</h3>
+<form action="/add-books-genres" method="post" id="add-books-genres">
+<table>
+    <tr>
+        <th>Book Name</th>
+        <th>Genre Name</th>
+    </tr>
+    <tr>
+        <td>
+            <select name="bookID" id="select-book">
+                    <option value="">Select a Book Name</option>
+                    {{#each books}}
+                        <option value="{{this.bookID}}">{{this.title}}</option>
+                    {{/each}}
+            </select>
+        </td>
+        <td>
+            <select name="genreID" id="select-genre">
+                    <option value="">Select a Genre Name</option>
+                    {{#each genres}}
+                        <option value="{{this.genreID}}">{{this.genreName}}</option>
+                    {{/each}}
+            </select>
+        </td>
+    </tr>
+    </tr>
+</table>
+<div>
+    <button type="submit">Add</button>
+</div>
+</form>

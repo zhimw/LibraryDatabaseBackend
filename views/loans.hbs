@@ -1,0 +1,146 @@
+<link href="../style.css" rel="stylesheet">
+<p id="navigation">
+    <a href="/">Home</a>
+    <a href="/patrons">Patrons</a>
+    <a href="/books">Books</a>   
+    <a href="/loans">Loans</a>   
+    <a href="/genres">Genres</a>   
+    <a href="/books-genres"> Books-Genres</a>   
+    <a href="/locations">Locations</a>   
+</p>
+
+<h1>Loans</h1>
+<h3>Display loans</h3>
+{{!-- Create a table --}}
+<table id="loans-table" class="display">
+    {{!-- Header section --}}
+    <thead>
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>Loan ID</th>
+            <th>Patron ID</th>
+            <th>Patron Last Name</th>
+            <th>Patron First Name</th>
+            <th>Book ID</th>
+            <th>Book Title</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- For each row, print the items in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.loanID}}</td>
+            <td>{{this.patronID}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.bookID}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.startDate}}</td>
+            <td>{{this.endDate}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<form action="/loans" method="get">
+    <div>
+        <button type="submit">Reset</button>
+    </div>
+</form>
+
+<br>
+<h3>View loans with the information you entered</h3>
+<p>All fields are optional. To get more accurate information, enter the ID fields</p>
+<form action="/view-loans" method="get">
+    <table>
+        <tr>
+            <th>Loan ID</th>
+            <th>Patron ID</th>
+            <th>Patron Last Name</th>
+            <th>Patron First Name</th>
+            <th>Book ID</th>
+            <th>Book Title</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+        <tr>
+            <td><input type="text" name="loanID" id="select-lid"></td>
+            <td><input type="text" name="patronID" id="select-pid"></td>
+            <td><input type="text" name="lastName" id="select-last-name"></td>
+            <td><input type="text" name="firstName" id="select-first-name"></td>
+            <td><input type="text" name="bookID" id="select-bid"></td>
+            <td><input type="text" name="title" id="select-title"></td>
+            <td><input type="date" name="startDate" id="date-start" 
+                min="2018-01-01" max="2028-12-31">
+            </td>
+            <td><input type="date" name="endDate" id="sdate-end" 
+                min="2018-01-01" max="2028-12-31">
+            </td>
+        </tr>
+    </table>
+    <div>
+        <button type="submit">View</button>
+    </div>
+</form>
+
+<br>
+<h3>Update the End Date of a Loan</h3>
+<p>Loan information is updated based on the Loan ID you entered.</p>
+<form action="/update-loan" method="post">
+<table>
+    <tr>
+        <th>Loan ID</th>
+        <th>End Date</th>
+    </tr>
+    <tr>
+        <td><input type="text" name="loanID" id="update-lid" required></td>
+        <td><input type="date" name="endDate" id="update-date-end"
+            min="2018-01-01" max="2028-12-31" required> 
+        </td>
+    </tr>
+</table>
+<div>
+    <button type="submit">Update</button>
+</div>
+</form>
+
+<br>
+<h3>Add a new loan to database</h3>
+<p>End Date is optional if the loan is ongoing.</p>
+<form action="/add-loan" method="post" id="add-loan">
+<table>
+    <tr>
+        <th>Patron ID</th>
+        <th>Book ID</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+    </tr>
+    <tr>
+        <td><input type="text" name="patronID" id="add-pid" required></td>
+        <td><input type="text" name="bookID" id="add-bid" required></td>
+        <td><input type="date" name="startDate" id="add-date-start"
+            min="2018-01-01" max="2028-12-31" required> 
+        </td>
+        <td><input type="date" name="endDate" id="add-date-end"
+            value="0000-00-00"
+            min="2018-01-01" max="2028-12-31"> 
+        </td>
+    </tr>
+</table>
+<div>
+    <button type="submit">Add</button>
+</div>
+</form>
+
+<br>
+<h3>Delete a loan from database</h3>
+<form action="/delete-loan" method="post">
+<label>Please enter Loan ID: </label>
+<input type="text" name="loanID" id="delete-pid" required>
+<div>
+    <button type="submit">Delete</button>
+</div>
+</form>

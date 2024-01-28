@@ -1,0 +1,129 @@
+<link href="../style.css" rel="stylesheet">
+<p id="navigation">
+    <a href="/">Home</a>
+    <a href="/patrons">Patrons</a>
+    <a href="/books">Books</a>   
+    <a href="/loans">Loans</a>   
+    <a href="/genres">Genres</a>   
+    <a href="/books-genres"> Books-Genres</a>   
+    <a href="/locations">Locations</a>   
+</p>
+
+    <h1>Patrons</h1>
+    <h3>Display patrons</h3>
+    <table class="display">
+    <thead>
+        <tr>
+        <th class="display">Patron ID</th>
+        <th class="display">Last name</th>
+        <th class="display">First name</th>
+        <th class="display">Email</th>
+        <th class="display">Phone</th>
+        <th class="display">Fines</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- For each row, print the items in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.patronID}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+            <td>{{this.fines}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+      </table>
+
+<form action="/patrons" method="get">
+    <div>
+        <button type="submit">Reset</button>
+    </div>
+</form>
+
+<br>
+      <h3>View patrons with the information you entered</h3>
+      <p>All fields are optional. To get more accurate information, enter the ID fields.</p>
+      <form action="/view-patrons" method="get">
+        <table>
+            <tr>
+              <th>Patron ID</th>
+              <th>Last name</th>
+              <th>First name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Fines</th>
+            </tr>
+            <tr>
+              <td><input type="text" name="patronID" id="select-pid"></td>
+              <td><input type="text" name="lastName" id="select-last-name"></td>
+              <td><input type="text" name="firstName" id="select-first-name"></td>
+              <td><input type="text" name="email" id="select-email"></td>
+              <td><input type="text" name="phone" id="select-phone"></td>
+              <td><input type="number" name="fines" id="select-fines" step="0.01"></td>
+            </tr>
+        </table>
+        <div>
+            <button type="submit">View</button>
+        </div>
+      </form>
+<br>
+      <h3>Update a patron from database</h3>
+      <p>Patron information is updated based on the Patron ID you entered. Fields left blank will not be changed.</p>
+      <form action="/update-patron" method="post">
+        <table>
+            <tr>
+              <th>Patron ID</th>
+              <th>Last name</th>
+              <th>First name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Fines</th>
+            </tr>
+            <tr>
+              <td><input type="text" name="patronID" id="update-patronID" required></td>
+              <td><input type="text" name="lastName" id="update-last-name"></td>
+              <td><input type="text" name="firstName" id="update-first-name"></td>
+              <td><input type="text" name="email" id="update-email"></td>
+              <td><input type="text" name="phone" id="update-phone"></td>
+              <td><input type="number" name="fines" id="update-fines" step="0.01"></td>
+            </tr>
+        </table>
+        <div>
+            <button type="submit">Update</button>
+        </div>
+      </form>
+      <br><br>
+      <h3>Add a patron to database</h3>
+      <form action="/add-patron" method="post">
+        <table>
+            <tr>
+                <th>Last name</th>
+                <th>First name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Fines</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="lastName" id="add-last-name" required></td>
+                <td><input type="text" name="firstName" id="add-first-name" required></td>
+                <td><input type="text" name="email" id="add-email" required></td>
+                <td><input type="text" name="phone" id="add-phone" required></td>
+                <td><input type="number" name="fines" id="add-fines" step="0.01" required></td>
+            </tr>
+        </table>
+        <div>
+            <button type="submit">Add</button>
+        </div>
+      </form>
+      <br>
+            <h3>Delete a patron from database</h3>
+      <form action="/delete-patron" method="post">
+        <label>Please enter Patron ID: </label>
+        <input type="text" name="patronID" required>
+        <div>
+          <button type="submit">Delete</button>
+        </div>
+      </form>
